@@ -1,0 +1,28 @@
+{
+  "name": "budget-tracker",
+  "version": "1.0.0",
+  "description": "An app that can track expenses and deposits with or without a connection.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "lite-server": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielalexvega/Budget-Tracker.git"
+  },
+  "author": "Daniel Vega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielalexvega/Budget-Tracker/issues"
+  },
+  "homepage": "https://github.com/danielalexvega/Budget-Tracker#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "lite-server": "^2.5.3",
+    "mongoose": "^5.5.15",
+    "morgan": "^1.9.1"
+  }
+}
