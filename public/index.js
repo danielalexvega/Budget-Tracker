@@ -11,15 +11,20 @@ if ("serviceWorker" in navigator) {
 let transactions = [];
 let myChart;
 
-fetch("/api/transaction")
-    .then(response => response.json())
-    .then(data => {
-        transactions = data;
+function getData() {
+    fetch("/api/transaction")
+        .then(response => response.json())
+        .then(data => {
+            transactions = data;
 
-        populateTotal();
-        populateTable();
-        populateChart();
-    });
+            populateTotal();
+            populateTable();
+            populateChart();
+        });
+}
+
+getData();
+
 
 function populateTotal() {
     // reduce transaction amounts to a single total value
@@ -37,10 +42,12 @@ function populateTable() {
 
     transactions.forEach(transaction => {
         // create and populate a table row
+        console.log(typeof transaction.date);
         let tr = document.createElement("tr");
         tr.innerHTML = `
       <td>${transaction.name}</td>
       <td>${transaction.value}</td>
+      <td>${new Date(transaction.date).toLocaleDateString()}</td>
     `;
 
         tbody.appendChild(tr);
@@ -88,6 +95,7 @@ function populateChart() {
 function sendTransaction(isAdding) {
     let nameEl = document.querySelector("#t-name");
     let amountEl = document.querySelector("#t-amount");
+    let dateEl = document.querySelector("#t-date");
     let errorEl = document.querySelector(".form .error");
 
     // validate form
@@ -100,13 +108,14 @@ function sendTransaction(isAdding) {
         errorEl.textContent = "";
         errorEl.style.display = "none";
     }
+    console.log(typeof dateEl.value);
+    console.log(new Date().toISOString());
 
     // create record
     let transaction = {
         name: nameEl.value,
         value: amountEl.value,
-        //let user choose date
-        date: new Date().toISOString()
+        date: new Date(dateEl.value).toISOString()
     };
 
     // if subtracting funds, convert amount to negative number
@@ -116,11 +125,6 @@ function sendTransaction(isAdding) {
 
     // add to beginning of current array of data
     transactions.unshift(transaction);
-
-    // re-run logic to populate ui with new record
-    populateChart();
-    populateTable();
-    populateTotal();
 
     // also send to server
     fetch("/api/transaction", {
@@ -137,6 +141,7 @@ function sendTransaction(isAdding) {
                 errorEl.textContent = "Missing Information";
             }
             else {
+                getData();
                 // clear form
                 nameEl.value = "";
                 amountEl.value = "";
@@ -154,18 +159,18 @@ function sendTransaction(isAdding) {
 
 function clearAll() {
     fetch("/api/transaction", {
-        method: "DELETE", 
+        method: "DELETE",
     })
-    .then(() => {
-        transactions = [];
+        .then(() => {
+            transactions = [];
 
-        populateTotal();
-        populateTable();
-        populateChart();
-    })
-    .catch(err => {
-        console.log(err);
-    })
+            populateTotal();
+            populateTable();
+            populateChart();
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 document.querySelector("#add-btn").onclick = function () {
