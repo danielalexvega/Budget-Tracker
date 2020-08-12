@@ -40,11 +40,12 @@ function populateTable() {
     tbody.innerHTML = "";
 
     transactions.forEach(transaction => {
+        
         let tr = document.createElement("tr");
         tr.innerHTML = `
       <td>${transaction.name}</td>
       <td>${transaction.value}</td>
-      <td>${new Date(transaction.date).toLocaleDateString()}</td>
+      <td>${new Date(transaction.date).toLocaleDateString('en-US', {timeZone: 'UTC'})}</td>
       <td class="td-delete"> <button id=${transaction._id} class="btn delete-btn">Delete</button></td>
     `;
         tbody.appendChild(tr);
@@ -110,8 +111,7 @@ function sendTransaction(isAdding) {
         errorEl.textContent = "";
         errorEl.style.display = "none";
     }
-    console.log(typeof dateEl.value);
-    console.log(new Date().toISOString());
+
 
     // create record
     let transaction = {
@@ -120,6 +120,7 @@ function sendTransaction(isAdding) {
         date: new Date(dateEl.value).toISOString()
     };
 
+  
     // if subtracting funds, convert amount to negative number
     if (!isAdding) {
         transaction.value *= -1;
