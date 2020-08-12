@@ -19,7 +19,7 @@ This app uses the following technologies:
 
 ## Deployment
 
-You can see the deployed app [here.](https://dashboard.heroku.com/apps/budgetwudget) 
+You can see the deployed app [here.](https://budgetwudget.herokuapp.com/) 
 
 
 
