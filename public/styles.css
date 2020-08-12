@@ -1,40 +1,64 @@
 body {
     font-size: 120%;
     font-family: Arial;
+    background-color: #EBFCFF;
   }
   
   button, input {
     font-size: 100%;
     font-family: Arial;
   }
+
+  .btn {
+    background-color: #0B2545;
+    color: #EBFCFF;
+  }
+
+  .btn:hover {
+    color: #7695A7;
+  }
   
   table {
     width: 100%;
+  }
+  th {
+    background-color: #384C57;
+    color: #EBFCFF;
   }
   
   td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 6px;
   }
   
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #C1CFD7;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #7695A7;
+
   }
   
   .error {
-    color: red;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #F75C03;
+    width: 25%;
+    color: #EBFCFF;
+    display: none;
   }
   
   .wrapper {
     margin: 0 auto;
     max-width: 825px;
     text-align: center;
+    height:1000px;
   }
   
   .total {
     font-size: 150%;
-    text-decoration: underline;
   }
   
   .form {

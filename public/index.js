@@ -78,7 +78,7 @@ function populateChart() {
             datasets: [{
                 label: "Total Over Time",
                 fill: true,
-                backgroundColor: "#6666ff",
+                backgroundColor: "#0B2545",
                 data
             }]
         }
@@ -93,10 +93,12 @@ function sendTransaction(isAdding) {
     // validate form
     if (nameEl.value === "" || amountEl.value === "") {
         errorEl.textContent = "Missing Information";
+        errorEl.style.display = "block";
         return;
     }
     else {
         errorEl.textContent = "";
+        errorEl.style.display = "none";
     }
 
     // create record
@@ -150,10 +152,30 @@ function sendTransaction(isAdding) {
         });
 }
 
+function clearAll() {
+    fetch("/api/transaction", {
+        method: "DELETE", 
+    })
+    .then(() => {
+        transactions = [];
+
+        populateTotal();
+        populateTable();
+        populateChart();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
 document.querySelector("#add-btn").onclick = function () {
     sendTransaction(true);
 };
 
 document.querySelector("#sub-btn").onclick = function () {
     sendTransaction(false);
+};
+
+document.querySelector("#clear-btn").onclick = () => {
+    clearAll();
 };

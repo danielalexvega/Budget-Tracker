@@ -31,4 +31,15 @@ router.get("/api/transaction", (req, res) => {
     });
 });
 
+router.delete("/api/transaction", (req, res) => {
+  console.log("You got here");
+  Transaction.remove({})
+  .then(dbTransaction => {
+    res.json(dbTransaction);
+  })
+  .catch(err => {
+    res.status(404).json(err);
+  });
+});
+
 module.exports = router;
