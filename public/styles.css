@@ -22,6 +22,17 @@ body {
   .btn:hover {
     color: #7695A7;
   }
+
+  .delete-btn{
+    margin:2px;
+    background-color: #FF1F26;
+    color: #EEEEEE;
+    font-size: 12px;
+  }
+
+  .delete-btn:hover {
+    color:#FFFFFF;
+  }
   
   table {
     width: 100%;
@@ -29,6 +40,18 @@ body {
   th {
     background-color: #384C57;
     color: #EBFCFF;
+  }
+
+  #th-date {
+    width:130px;
+  }
+
+  #th-delete {
+    width:100px;
+  }
+
+  .td-delete{
+    text-align: center;
   }
   
   td, th {
@@ -49,7 +72,7 @@ body {
   .error {
     margin: 15px auto;
     padding: 10px;
-    background-color: #F75C03;
+    background-color: #FF1F26;
     width: 25%;
     color: #EBFCFF;
     display: none;

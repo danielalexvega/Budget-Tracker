@@ -42,16 +42,23 @@ function populateTable() {
 
     transactions.forEach(transaction => {
         // create and populate a table row
-        console.log(typeof transaction.date);
+        console.log(transaction._id);
         let tr = document.createElement("tr");
         tr.innerHTML = `
       <td>${transaction.name}</td>
       <td>${transaction.value}</td>
       <td>${new Date(transaction.date).toLocaleDateString()}</td>
+      <td class="td-delete"> <button id=${transaction._id} class="btn delete-btn">Delete</button></td>
     `;
 
         tbody.appendChild(tr);
     });
+
+    $(".delete-btn").on("click", (event) => {
+        console.log(event.target.id);
+    })
+
+
 }
 
 function populateChart() {
@@ -173,6 +180,10 @@ function clearAll() {
         })
 }
 
+function deleteItem(objectId) {
+
+}
+
 document.querySelector("#add-btn").onclick = function () {
     sendTransaction(true);
 };
@@ -184,3 +195,4 @@ document.querySelector("#sub-btn").onclick = function () {
 document.querySelector("#clear-btn").onclick = () => {
     clearAll();
 };
+
