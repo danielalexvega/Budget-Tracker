@@ -25,7 +25,6 @@ function getData() {
 
 getData();
 
-
 function populateTotal() {
     // reduce transaction amounts to a single total value
     let total = transactions.reduce((total, t) => {
@@ -41,8 +40,6 @@ function populateTable() {
     tbody.innerHTML = "";
 
     transactions.forEach(transaction => {
-        // create and populate a table row
-        console.log(transaction._id);
         let tr = document.createElement("tr");
         tr.innerHTML = `
       <td>${transaction.name}</td>
@@ -50,15 +47,13 @@ function populateTable() {
       <td>${new Date(transaction.date).toLocaleDateString()}</td>
       <td class="td-delete"> <button id=${transaction._id} class="btn delete-btn">Delete</button></td>
     `;
-
         tbody.appendChild(tr);
     });
 
     $(".delete-btn").on("click", (event) => {
         console.log(event.target.id);
-    })
-
-
+        //deleteItem(event.target.id);
+    });
 }
 
 function populateChart() {
@@ -166,11 +161,10 @@ function sendTransaction(isAdding) {
 
 function clearAll() {
     fetch("/api/transaction", {
-        method: "DELETE",
+        method: "DELETE"
     })
         .then(() => {
             transactions = [];
-
             populateTotal();
             populateTable();
             populateChart();
@@ -180,9 +174,21 @@ function clearAll() {
         })
 }
 
-function deleteItem(objectId) {
-
-}
+// function deleteItem(objectId) {
+//     fetch("/api/transaction/delete", {
+//         method: "DELETE",
+//         body:objectId
+//     })
+//         .then(() => {
+//             transactions = [];
+//             populateTotal();
+//             populateTable();
+//             populateChart();
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         })
+// }
 
 document.querySelector("#add-btn").onclick = function () {
     sendTransaction(true);

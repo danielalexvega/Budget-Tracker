@@ -31,8 +31,18 @@ router.get("/api/transaction", (req, res) => {
     });
 });
 
+router.delete("/api/transaction/delete", (req, res) => {
+  console.log("you got here");
+  Transaction.remove({_id: req.body})
+  .then(dbTransaction => {
+    res.json(dbTransaction);
+  })
+  .catch(err => {
+    res.status(404).json(err);
+  });
+});
+
 router.delete("/api/transaction", (req, res) => {
-  console.log("You got here");
   Transaction.remove({})
   .then(dbTransaction => {
     res.json(dbTransaction);
@@ -41,5 +51,6 @@ router.delete("/api/transaction", (req, res) => {
     res.status(404).json(err);
   });
 });
+
 
 module.exports = router;
